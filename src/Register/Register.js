@@ -2,6 +2,7 @@
 
 import React, { useState } from "react";
 import axios from "axios";
+import { Api } from "@/services/Api";
 export const Register = ({ fnGetUsers }) => {
   const [data, setData] = useState({});
   const fnchange = (eve) => {
@@ -22,10 +23,10 @@ export const Register = ({ fnGetUsers }) => {
   const fnregister = async () => {
     try {
       console.log(data);
-      const res = await axios.post("http://localhost:2020/std/reg-std", {
+      const res = await Api.sendPostReq("std/reg-std", {
         data,
       });
-      console.log(res);
+
       const { acknowledged, insertedId } = res.data;
       if (acknowledged && insertedId) {
         setData({
